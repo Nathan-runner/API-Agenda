@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CLIENTE
+  FUNCIONARIO
+}
+
+enum Status {
+  AGUARDANDO
+  EM_ATENDIMENTO
+  FINALIZADO
+  CANCELADO
+}
+
+model User {
+  id           String        @id @default(uuid())
+  nome         String
+  email        String        @unique
+  password     String
+  telefone     String
+  role         Role          @default(CLIENTE)
+  createdAt    DateTime      @default(now())
+  professional Professional?
+}
+
+model Professional {
+  id         String      @id @default(uuid())
+  userId     String      @unique
+  funcao     String
+  user       User        @relation(fields: [userId], references: [id])
+  services   Services[]
+  timeBlocks TimeBlock[]
+}
+
+model Services {
+  id             String       @id @default(uuid())
+  nome           String
+  duracaominutos Int
+  preco          Float
+  descricao      String?
+  professionalId String
+  professional   Professional  @relation(fields: [professionalId], references: [id])
+  appointments   Appointment[]
+}
+
+model TimeBlock {
+  id             String       @id @default(uuid())
+  inicio         DateTime
+  fim            DateTime
+  motivo         String?
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+}
+
+model Appointment {
+  id             String   @id @default(uuid())
+  dataHoraInicio DateTime
+  dataHoraFim    DateTime
+  status         Status   @default(AGUARDANDO)
+  serviceId      String
+  service        Services @relation(fields: [serviceId], references: [id])
+}
