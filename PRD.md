@@ -33,9 +33,6 @@
 * **Busca de Agendamentos:** Localização rápida por nome ou serviço para agilizar o atendimento.
 * **Gestão de Disponibilidade:** O funcionário pode editar seus horários e bloquear períodos de folga ou intervalo.
 
-## 6. Diferencial da Squad
-* 
-
-## 7. Divisão da Squad
+## 6. Divisão da Squad
 Existe um documento dedicado que detalha as funções de cada membro, disponível para alinhamento da equipe.
 ```  https://docs.google.com/document/d/1RAwf80XgOGabGcTnEqfP0UX37BzctCNjwRZisheYsMQ/edit?usp=drivesdk ```
